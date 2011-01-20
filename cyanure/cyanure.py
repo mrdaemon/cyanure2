@@ -25,12 +25,12 @@
 
 """ Main cyanure module """
 
+import logging
+
 import constants
 import log
 
-# FIXME: Temporary early initialization with static parameters, for
-# testing and prototyping.
-logger = log.init_log('cyanure.log', 'DEBUG')
+logger = logging.getLogger('cyanure')
 
 def boot():
     """ Initialize application and parameters """
@@ -49,6 +49,10 @@ def boot():
                                     Copyright (c) Alexandre Gauthier 2010-2011
                                                            All Rights Reserved
           """ % ( constants.VERSION, constants.TAGNAME )
+
+    # Initialize log
+    # TODO: The values should be read from config file.
+    log.init_log('cyanure.log', 'DEBUG')
 
     logger.info("Cyanure system init: Version %s (%s)" % (
         constants.VERSION, constants.TAGNAME ))

@@ -39,6 +39,8 @@ LEVELS = {
 
 _DEFAULTLEVEL = 'warning'
 
+baselogger = logging.getLogger("cyanure")
+
 class LoggerInitError(Exception):
     """ Error thrown when the logging system fails to initialize """
     def __init__(self, message="Unknown Logger Error. Please file a bug."):
@@ -58,7 +60,6 @@ def init_log(logfp, level=_DEFAULTLEVEL, conecho=True):
             _DEFAULTLEVEL)
         level = _DEFAULTLEVEL
 
-    baselogger = logging.getLogger("cyanure")
 
     # Not using default value in get() so the above warning can be
     # displayed.
@@ -73,7 +74,6 @@ def init_log(logfp, level=_DEFAULTLEVEL, conecho=True):
     lformatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
-    lhandler.setLevel(log_level)
     lhandler.setFormatter(lformatter)
 
     baselogger.addHandler(lhandler)
@@ -82,9 +82,10 @@ def init_log(logfp, level=_DEFAULTLEVEL, conecho=True):
         chandler = logging.StreamHandler()
         cformatter = logging.Formatter("%(levelname)-8s %(message)s")
 
-        chandler.setLevel(log_level)
         chandler.setFormatter(cformatter)
 
         baselogger.addHandler(chandler)
 
-    return baselogger
+    baselogger.setLevel(log_level)
+
+    baselogger.info("Logging system initialized.")
