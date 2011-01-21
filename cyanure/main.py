@@ -27,8 +27,7 @@
 
 import logging
 
-import constants
-import log
+from cyanure import log, constants
 
 logger = logging.getLogger('cyanure')
 
@@ -57,6 +56,3 @@ def boot():
     logger.info("Cyanure system init: Version %s (%s)" % (
         constants.VERSION, constants.TAGNAME ))
 
-
-if __name__ == '__main__':
-    boot()

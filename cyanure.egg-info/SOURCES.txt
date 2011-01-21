@@ -1,9 +1,0 @@
-setup.cfg
-setup.py
-cyanure/__init__.py
-cyanure.egg-info/PKG-INFO
-cyanure.egg-info/SOURCES.txt
-cyanure.egg-info/dependency_links.txt
-cyanure.egg-info/entry_points.txt
-cyanure.egg-info/not-zip-safe
-cyanure.egg-info/top_level.txt
