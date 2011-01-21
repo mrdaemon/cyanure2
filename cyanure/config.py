@@ -28,10 +28,19 @@
 from __future__ import with_statement
 import ConfigParser
 
+class ConfigFileError(Exception):
+    """ Error thrown when the config file is malformed or invalid """
+    def __init__(self, message="Unknown Error. Please file a bug"):
+        super(ConfigFileError, self).__init__()
+        self.message = message
+
+
 class ConfigFile(object):
     ''' Configuration Parser Class '''
     def __init__(self, configfp):
-        self._config = ConfigParser.SafeConfigParser()
+        self._config = ConfigParser.SafeConfigParser(
+                { 'ainame': 'Cyanure' }
+            )
         self.configfp = configfp
         try:
             self._cfhandle = open(self.configfp, 'r')
@@ -43,5 +52,8 @@ class ConfigFile(object):
         else:
             with self._cfhandle as cfhandle:
                 self._config.read(cfhandle)
+
+        self.ainame = self._config.get('system', 'ainame')
+
 
 
